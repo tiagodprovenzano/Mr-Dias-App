@@ -1,0 +1,7 @@
+export const MUDA_PAGINA = 'MUDA_PAGINA'
+export const MUDA_GALERIA = 'MUDA_GALERIA'
+export const MUDA_NOME = 'MUDA_NOME'
+export const MUDA_EMAIL = 'MUDA_EMAIL'
+export const MUDA_TELEFONE = 'MUDA_TELEFONE'
+export const MUDA_MENSAGEM = 'MUDA_MENSAGEM'
+export const MUDA_DATABASE = 'MUDA_DATABASE'
