@@ -174,28 +174,85 @@ contatoTitleWrap:{
 },
 
 contatoTitleText:{
-    fontSize:22, 
+    fontSize:20, 
     fontFamily:'Roboto', 
     textAlign:'left', 
     color:'#f7941d', 
     fontWeight:'bold', 
-    marginTop:20, 
+     
     alignSelf:'flex-start', 
-    paddingHorizontal:10
+    paddingHorizontal:10, 
+    textAlignVertical:'center'
+},
+contatoSubTitleText:{
+    fontSize:15, 
+    alignSelf:'left',
+    width:width(30),
+    fontFamily:'Roboto', 
+    textAlign:'left', 
+    color:'#f7941d', 
+    fontWeight:'bold', 
+    alignSelf:'flex-start', 
+    paddingHorizontal:10,
+    textAlignVertical:'center',
+},
+contatoSubTitleWrap:{
+    width:width(90),
+    flexDirection:'row', 
+    justifyContent:'space-between',
+    alignItems:'center',
+    alignSelf:'center'
+
+},
+
+contatoErrorMessage:{
+    marginLeft:5,
+fontSize:10,
+color:'red',
+textAlignVertical:'center'
+},
+
+contatoContentText:{
+    fontSize:15, 
+    fontFamily:'Roboto', 
+    paddingHorizontal:5,
+    textAlignVertical:'center'
 },
 
 contatoFormularioTopWrap:{
     backgroundColor:'#EBEDEF', 
     marginTop:20,
+    marginBottom:20,
+    marginHorizontal:10,
     padding:10, 
     borderRadius:10, 
     elevation:7
+}, 
+contatoDiretoTopWrap:{
+    backgroundColor:'#EBEDEF', 
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal:10,
+    padding:10, 
+    borderRadius:10, 
+    elevation:7, 
+    flexDirection:'row'
+}, 
+contatoTitleTopWrap:{
+    backgroundColor:'#ffffff', 
+    marginTop:5,
+    marginBottom:5,
+    marginHorizontal:10,
+    padding:10, 
+    borderRadius:10, 
+    elevation:5, 
+    justifyContent:'center'
 }, 
 
 contatoFormularioTextInput:{
     padding:8,  
     width:width(90), 
-    marginBottom:10, 
+    marginTop:5, 
     borderRadius:10, 
     backgroundColor:'#FBFCFC', 
     elevation:0, 
