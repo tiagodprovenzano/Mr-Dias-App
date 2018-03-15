@@ -6,7 +6,8 @@ import {
     MUDA_EMAIL,
     MUDA_TELEFONE,
     MUDA_MENSAGEM, 
-    MUDA_DATABASE
+    MUDA_DATABASE,
+    MUDA_ARRVERIF
 
 } from './types'
 
