@@ -149,7 +149,11 @@ export class Contato extends Component{
                 <View style={{width:width(20)}}>
                     <Text style={estilos.contatoSubTitleText}>e-mail:</Text>
                 </View>
-                <TouchableOpacity style={{width:width(70)}}>
+                <TouchableOpacity style={{width:width(70)}}
+                    onPress={()=>{
+                        email(['contato@provenzanoti.com.br'], null, null, null, null)
+                    }}
+                >
                     <Text style={estilos.contatoContentText}>contato@provenzanoti.com.br</Text>
                 </TouchableOpacity>
             </View>
