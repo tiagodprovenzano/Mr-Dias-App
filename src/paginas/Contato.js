@@ -33,7 +33,7 @@ export class Contato extends Component{
     }
     
     _mensagemErro(input){
-        console.log('entramos na mensagem com ' + input)
+        //console.log('entramos na mensagem com ' + input)
         let arrVerif = this.props.arrVerif
         if (arrVerif.length > 0){
             for (i in arrVerif){
