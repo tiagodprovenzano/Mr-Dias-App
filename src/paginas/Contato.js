@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
