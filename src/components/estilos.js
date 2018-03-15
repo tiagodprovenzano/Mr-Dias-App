@@ -216,7 +216,9 @@ contatoContentText:{
     fontSize:15, 
     fontFamily:'Roboto', 
     paddingHorizontal:5,
-    textAlignVertical:'center'
+    textAlignVertical:'center', 
+    textDecorationLine:'underline', 
+    color: 'blue'
 },
 
 contatoFormularioTopWrap:{

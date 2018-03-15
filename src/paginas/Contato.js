@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
 import Accordion from 'react-native-collapsible/Accordion';
+import {email, phonecall} from 'react-native-communications';
 
 import estilos from '../components/estilos'
 import {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone, mudaArrVerif} from '../actions/AppActions'
