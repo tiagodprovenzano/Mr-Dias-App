@@ -162,6 +162,11 @@ export class Contato extends Component{
                     <Text style={estilos.contatoSubTitleText}>cel:</Text>
                 </View>
                 <TouchableOpacity style={{width:width(70)}}>
+                <TouchableOpacity style={{width:width(70)}}
+                    onPress={()=>{
+                        phonecall('11953970679', true)
+                    }}
+                >
                     <Text style={estilos.contatoContentText}>(11) 95397-0679</Text>
                 </TouchableOpacity>
             </View>
