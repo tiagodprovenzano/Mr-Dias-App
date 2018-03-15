@@ -53,3 +53,9 @@ export const mudaDatabase = (data) => {
         payload: data
     }
 }
+export const mudaArrVerif = (arr) => {
+    return {
+        type: MUDA_ARRVERIF,
+        payload: arr
+    }
+}
