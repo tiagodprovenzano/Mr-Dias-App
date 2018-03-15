@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView} from 'react-
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
+import Accordion from 'react-native-collapsible/Accordion';
 
 import estilos from '../components/estilos'
 import {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone} from '../actions/AppActions'
