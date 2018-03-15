@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
+import Accordion from 'react-native-collapsible/Accordion';
+import {email, phonecall} from 'react-native-communications';
 
 import estilos from '../components/estilos'
-import {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone} from '../actions/AppActions'
+import {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone, mudaArrVerif} from '../actions/AppActions'
 import HeaderPagina from '../components/HeaderPagina'
 import Footer from '../components/Footer'
+import {formValidation} from '../components/formValidation'
 
 export class Contato extends Component{
 
@@ -28,20 +31,45 @@ export class Contato extends Component{
         this.props.mudaMensagem('')
 
     }
-    render(){
+    
+    _mensagemErro(input){
+        //console.log('entramos na mensagem com ' + input)
+        let arrVerif = this.props.arrVerif
+        if (arrVerif.length > 0){
+            for (i in arrVerif){
+                if(arrVerif[i].tipo === input){
+                    return (
+                    <Text style={estilos.contatoErrorMessage}>*{arrVerif[i].mensagem}</Text>
+                )
+                }
+            }
+        }
+    }
+
+    _renderHeader(section){
         let database = this.props.database['contato']
-        console.log(database)
-        return(
-            <View style={estilos.contatoTopWrap}>
-                <View style={{flex:1}}>
-                
-                    <HeaderPagina/>
-
-                <View style={estilos.contatoTitleWrap}>
-                    <Text style={estilos.contatoTitleText}>
+        if(section === 'Formulário'){
+            return(
+                <View style={estilos.contatoTitleTopWrap} >
+                <Text style={estilos.contatoTitleText}>
                         {database['formulario']['titulo'].conteudo}
-                    </Text>
-
+                </Text>
+                </View>
+            )
+        }
+        if(section === 'Dados de contato'){
+            return( 
+            <View style={estilos.contatoTitleTopWrap} >
+                <Text style={estilos.contatoTitleText}>Contato direto:</Text>
+            </View>
+            )
+       
+        }
+    }
+    _renderContent(section){
+        let database = this.props.database['contato']
+        if(section === 'Formulário'){
+            return(
                 <View style={estilos.contatoFormularioTopWrap}>
                     <TextInput
                         placeholder={database['formulario']['placeholder1'].conteudo}
@@ -54,7 +82,7 @@ export class Contato extends Component{
                         
                         }}
                     />
-                
+                    {this._mensagemErro('nome')}
                     <TextInput
                         placeholder={database['formulario']['placeholder2'].conteudo}
                         style={estilos.contatoFormularioTextInput}
@@ -66,7 +94,7 @@ export class Contato extends Component{
                         
                         }}    
                     />
-                
+                    {this._mensagemErro('email')}
                     <TextInput
                         placeholder={database['formulario']['placeholder3'].conteudo}
                         multiline={true}
@@ -80,11 +108,31 @@ export class Contato extends Component{
                         
                         }}
                     />
-                
+                    {this._mensagemErro('mensagem')}
                     <TouchableOpacity style={estilos.contatoButtomWrap}
                         onPress={()=> {
+                        let arrVerif = []
                         
+                        if(formValidation(this.props.mensagem, 'mensagem') != null){
+                            let verif = formValidation(this.props.mensagem, 'mensagem')
+                            arrVerif.push(verif)
+                        }
+                        if(formValidation(this.props.nome, 'nome') != null){
+                            arrVerif.push(formValidation(this.props.nome, 'nome'))
+                        }
+                        if(formValidation(this.props.email, 'email') != null){
+                            arrVerif.push(formValidation(this.props.email, 'email'))
+                        }
+
+                        if(arrVerif.length === 0){
+                            this.props.mudaArrVerif(arrVerif)
                             this._post()
+                        }else{
+                            this.props.mudaArrVerif(arrVerif)
+                            Alert.alert('Erro no envio.', 'Verifique os dados inseridos.')
+                        }
+
+
 
                         }}
                     >
@@ -92,7 +140,69 @@ export class Contato extends Component{
                     
                     </TouchableOpacity>
                 </View>
+            )
+        }
+        if(section === 'Dados de contato'){
+            return(
+            <View >
+            <View style={estilos.contatoDiretoTopWrap}>
+                <View style={{width:width(20)}}>
+                    <Text style={estilos.contatoSubTitleText}>e-mail:</Text>
+                </View>
+                <TouchableOpacity style={{width:width(70)}}
+                    onPress={()=>{
+                        email(['contato@provenzanoti.com.br'], null, null, null, null)
+                    }}
+                >
+                    <Text style={estilos.contatoContentText}>contato@provenzanoti.com.br</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={estilos.contatoDiretoTopWrap}>
+                <View style={{width:width(20)}}>
+                    <Text style={estilos.contatoSubTitleText}>cel:</Text>
+                </View>
+                <TouchableOpacity style={{width:width(70)}}
+                    onPress={()=>{
+                        phonecall('11953970679', true)
+                    }}
+                >
+                    <Text style={estilos.contatoContentText}>(11) 95397-0679</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={estilos.contatoDiretoTopWrap}>
+            <View style={{width:width(20)}}>
+                <Text style={estilos.contatoSubTitleText}>web:</Text>
+            </View>
+                <TouchableOpacity style={{width:width(70)}}>
+                <Text style={estilos.contatoContentText}>www.provenzanoti.com.br</Text>
+                </TouchableOpacity>
+            </View>
+            </View>
+            )
+        }
+    }
+
+    render(){
+        let database = this.props.database['contato']
+        return(
+            <View style={estilos.contatoTopWrap}>
+                <View style={{flex:1}}>
                 
+                    <HeaderPagina/>
+
+                <View style={estilos.contatoTitleWrap}>
+               <ScrollView contentContainerStyle={{flexGrow:1}}>
+                <Accordion
+                    
+                    sections={[{titulo:'Formulário'}, {titulo:'Dados de contato'}]}
+                    renderHeader={(section)=> this._renderHeader(section.titulo)}
+                    renderContent={(section)=> this._renderContent(section.titulo)}
+                    touchableComponent={TouchableOpacity}
+                    touchableProps={style={elevation:7}}
+                    initiallyActiveSection={0}
+                />
+                </ScrollView>   
                 </View>
                 </View>
                     <Footer/>
@@ -108,14 +218,16 @@ const mapStateToProps = state =>{
     let telefone = state.AppReducer.nome
     let mensagem = state.AppReducer.mensagem
     let database = state.AppReducer.database
+    let arrVerif = state.AppReducer.arrVerif
     return{
         navegador,
         nome,
         email, 
         telefone, 
         mensagem,
-        database
+        database, 
+        arrVerif
     }
 }
 
-export default connect(mapStateToProps, {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone})(Contato)
+export default connect(mapStateToProps, {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone, mudaArrVerif})(Contato)

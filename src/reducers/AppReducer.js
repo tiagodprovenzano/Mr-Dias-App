@@ -6,7 +6,8 @@ import {
     MUDA_EMAIL,
     MUDA_TELEFONE,
     MUDA_MENSAGEM, 
-    MUDA_DATABASE
+    MUDA_DATABASE,
+    MUDA_ARRVERIF
 
    } from '../actions/types.js'
 
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
     telefone:'',  
     mensagem:'',
     database:{},
+    arrVerif:[],
 
 }
 
@@ -44,6 +46,9 @@ export default (state = INITIAL_STATE, action) =>{
     }
      if (action.type == MUDA_DATABASE){
      return { ...state, database: action.payload }
+    }
+     if (action.type == MUDA_ARRVERIF){
+     return { ...state, arrVerif: action.payload }
     }
     
 return state

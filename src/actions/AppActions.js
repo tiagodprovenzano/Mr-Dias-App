@@ -6,7 +6,8 @@ import {
     MUDA_EMAIL,
     MUDA_TELEFONE,
     MUDA_MENSAGEM, 
-    MUDA_DATABASE
+    MUDA_DATABASE,
+    MUDA_ARRVERIF
 
 } from './types'
 
@@ -50,5 +51,11 @@ export const mudaDatabase = (data) => {
     return {
         type: MUDA_DATABASE,
         payload: data
+    }
+}
+export const mudaArrVerif = (arr) => {
+    return {
+        type: MUDA_ARRVERIF,
+        payload: arr
     }
 }

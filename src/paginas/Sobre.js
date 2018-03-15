@@ -11,7 +11,7 @@ import estilos from '../components/estilos';
 export class Sobre extends Component{
     render(){
         let database = this.props.database['sobre']
-        console.log(Object.keys(database))
+//        console.log(Object.keys(database))
         return(
     
     <View style={{flex:1}}>
