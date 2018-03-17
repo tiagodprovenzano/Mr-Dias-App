@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
+import {Card} from 'react-native-elements'
 
 import {navegar} from '../actions/AppActions'
 import HeaderPagina from '../components/HeaderPagina'
@@ -19,24 +20,44 @@ export class Sobre extends Component{
             <HeaderPagina/>
 
         <ScrollView contentContainerStyle={{flexGrow:1}}>
-            <View style={{flex:1, backgroundColor:'#FBFCFC', padding:20}}>
-                <View style={{width:width(90), backgroundColor:'#E5E7E9', borderRadius:7, elevation:4}}>
-                    <View style={{padding:10}}>
-                        
-                        <Text style={estilos.sobreTitleText}>{database['titulo']['sobre'].conteudo}</Text>
-                        
-                        <Text style={estilos.sobreContentText}>{database['conteudo']['conteudo1'].conteudo} </Text>
-                        <Image resizeMode='contain' source={require('../imgs/londonNight.jpg')} style={estilos.sobreContentImage}/>
+            <View style={{flex:1, backgroundColor:'#ffffff'}}>
+            <Card
+                    raised
+                    containerStyle={{width:width(95), alignSelf:'center', backgroundColor:'#f7f9f9', elevation:4}}
+                    image={require('../imgs/londonMedium.jpg')}>
+                    <Text style={{marginBottom: 10}}>
+                    {database['conteudo']['conteudo1'].conteudo}
+                    </Text>
+                    
+                    </Card>
             
-                        <Text style={estilos.sobreContentText}>{database['conteudo']['conteudo2'].conteudo}</Text>
-                        <Image resizeMode='contain' source={require('../imgs/tigerButterrfly.jpg')} style={estilos.sobreContentImage}/>
-
-                        <Text style={estilos.sobreContentText}>{database['conteudo']['conteudo3'].conteudo}</Text>
-                        <Image resizeMode='contain' source={require('../imgs/maos.jpg')} style={estilos.sobreContentImage}/>
-
-                        <Text style={estilos.sobreContentText}>{database['conteudo']['conteudo4'].conteudo}</Text>
+            <Card
+                    containerStyle={{width:width(95), alignSelf:'center', backgroundColor:'#f7f9f9', elevation:4}}
+                    image={require('../imgs/tigerButterrfly.jpg')}>
+                    <Text style={{marginBottom: 10}}>
+                    {database['conteudo']['conteudo2'].conteudo}
+                    </Text>
+                    
+                    </Card>
+            <Card
+                    containerStyle={{width:width(95), alignSelf:'center', backgroundColor:'#f7f9f9', elevation:4}}
+                    image={require('../imgs/maos.jpg')}
+                    imageProps={{resizeMode:'cover'}}>
+                    <Text style={{marginBottom: 10}}>
+                    {database['conteudo']['conteudo3'].conteudo}
+                    </Text>
+                    
+                    </Card>
+            <Card
+                    containerStyle={{width:width(95), alignSelf:'center', elevation:4, backgroundColor:'#f7f9f9', marginBottom:10}}
+                    image={require('../imgs/casamento.jpg')}>
+                    <Text style={{marginBottom: 10}}>
+                    {database['conteudo']['conteudo4'].conteudo}
+                    </Text>
+                    
+                    </Card>
                 
-                    </View>
+                <View style={{width:width(90), backgroundColor:'#f7f9f9', borderRadius:7, elevation:4}}>
                 </View>
             </View>
         </ScrollView>
