@@ -23,7 +23,7 @@ export class Clientes extends Component{
                     <Text>Voltar</Text>
                 </TouchableOpacity>
                 </View>
-                <Footer/>
+                
             </View>
         )
     }
