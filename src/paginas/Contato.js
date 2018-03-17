@@ -50,7 +50,7 @@ export class Contato extends Component{
         let database = this.props.database['contato']
         if(section === 'Formulário'){
             return(
-                <View style={estilos.contatoTitleTopWrap} >
+                <View style={estilos.servicosHeaderWrap} >
                 <Text style={estilos.contatoTitleText}>
                         {database['formulario']['titulo'].conteudo}
                 </Text>
@@ -59,7 +59,7 @@ export class Contato extends Component{
         }
         if(section === 'Dados de contato'){
             return( 
-            <View style={estilos.contatoTitleTopWrap} >
+            <View style={estilos.servicosHeaderWrap} >
                 <Text style={estilos.contatoTitleText}>Contato direto:</Text>
             </View>
             )
