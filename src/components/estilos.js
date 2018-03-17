@@ -193,7 +193,7 @@ contatoTitleText:{
     color:'#f7941d', 
     fontWeight:'bold', 
      
-    alignSelf:'flex-start', 
+    alignSelf:'center', 
     paddingHorizontal:10, 
     textAlignVertical:'center'
 },
