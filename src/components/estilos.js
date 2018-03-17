@@ -76,10 +76,10 @@ servicosHeaderTitle: {
 },
 
 servicosContentWrap:{
-    marginBottom:10,
+    marginVertical:10,
     width:width(90), 
     alignSelf:'center', 
-    backgroundColor:'#E5E7E9', 
+    backgroundColor:'#F2F3F4', 
     elevation:3, 
     borderRadius:7
 },
