@@ -67,11 +67,11 @@ servicosHeaderWrap: {
 },
 
 servicosHeaderTitle: {
-    fontWeight:'bold', 
+    textAlignVertical:'center', 
+    marginHorizontal:30, 
     fontSize:20, 
-    textAlign:'center',
-    fontFamily: 'Roboto',
-    color: '#f7941d'
+    fontFamily:'Roboto',
+    color:'#58585a'
 
 },
 
