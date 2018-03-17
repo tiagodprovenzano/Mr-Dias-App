@@ -80,13 +80,7 @@ export class Footer extends Component{
                     <Text style={estilos.footerTextButton}>CONTATO</Text>
                 </View>
                 
-                <View style={estilos.footerButtonWrap}>
-                    <TouchableOpacity onPress={()=> this.props.navegar('cliente')} style={this._setLayout('cliente')}>
-                        <Image resizeMode='contain' source={require('../imgs/padlockPeq.png')} style={estilos.footerIcon}/>
-                    </TouchableOpacity>
                 
-                    <Text style={estilos.footerTextButton}>Login</Text>
-                </View>
             </View>
         )
     }
