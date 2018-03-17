@@ -11,7 +11,7 @@ import {navegar} from '../actions/AppActions'
 export class Footer extends Component{
     _setBackground(icone){
         if(this.props.navegador === icone){
-            return '#f7941d'
+            return '#ffc553'
         }else{
             return '#F2F3F4'
         }
