@@ -54,7 +54,7 @@ sobreContentImage:{
     alignSelf: 'center',
     borderRadius:5, 
     marginVertical:10, 
-    width:width(85),
+    width:width(95),
 },
 
 servicosHeaderWrap: { 
