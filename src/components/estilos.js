@@ -22,6 +22,16 @@ headerPaginaTopWrap:{
     flexDirection:'row', 
 },
 
+headerPaginaText:{
+    
+    fontSize:22, 
+    fontFamily:'Roboto', 
+    textAlign:'left', 
+    color:'#f7941d', 
+    fontWeight:'bold', 
+    marginBottom:5,
+    alignSelf:'center'
+},
 sobreTitleText:{
     
     fontSize:22, 
