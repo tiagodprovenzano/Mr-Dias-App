@@ -44,7 +44,7 @@ export class Footer extends Component{
                     <Icon name='people' color='#4f5b62' />
                     </TouchableOpacity>
                     
-                    <Text style={estilos.footerTextButton}>Sobre</Text>
+                    <Text style={estilos.footerTextButton}>SOBRE</Text>
                 </View>
 
                 <View style={estilos.footerButtonWrap}>
@@ -52,15 +52,14 @@ export class Footer extends Component{
                         <Icon name='photo-camera' color='#4f5b62' />
                     </TouchableOpacity>
                     
-                    <Text style={estilos.footerTextButton}>Portfólio</Text>
+                    <Text style={estilos.footerTextButton}>SERVIÇOS</Text>
                 </View>
-                
                 <View style={estilos.footerButtonWrap}>
                     <TouchableOpacity onPress={()=> this.props.navegar('portfolio')} style={this._setLayout('portfolio')}>
                     <Icon name='photo-library' color='#4f5b62' />
                     </TouchableOpacity>
                     
-                    <Text style={estilos.footerTextButton}>Social</Text>
+                    <Text style={estilos.footerTextButton}>PORTFÓLIO</Text>
                 </View>
                 
                 <View style={estilos.footerButtonWrap}>
@@ -68,15 +67,17 @@ export class Footer extends Component{
                     <Icon name='share' color='#4f5b62' />
                     </TouchableOpacity>
                     
-                    <Text style={estilos.footerTextButton}>Serviços</Text>
+                    <Text style={estilos.footerTextButton}>SOCIAL</Text>
                 </View>
+                
+                
                 
                 <View style={estilos.footerButtonWrap}>
                     <TouchableOpacity onPress={()=> this.props.navegar('contato')} style={this._setLayout('contato')}>
                     <Icon name='mail' color='#4f5b62' />
                     </TouchableOpacity>
                 
-                    <Text style={estilos.footerTextButton}>Contato</Text>
+                    <Text style={estilos.footerTextButton}>CONTATO</Text>
                 </View>
                 
                 <View style={estilos.footerButtonWrap}>
