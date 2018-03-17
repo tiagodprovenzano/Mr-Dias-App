@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import Header from './Header'
 import {navegar} from '../actions/AppActions'
 import estilos from './estilos';
+import {Icon} from 'react-native-elements'
 
 export class HeaderPagina extends Component{
     render(){
@@ -19,7 +20,12 @@ export class HeaderPagina extends Component{
                     }}
                     
                 >
-                    <Text style={estilos.backButtomText}>{'<'}</Text>
+                    <Icon 
+                        name='home'
+                        color='#EBEDEF'
+                        size={35}
+                    />
+
                 </TouchableOpacity>
                 <View style={{width:width(82)}}>
                 <Header />
