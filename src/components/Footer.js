@@ -3,6 +3,7 @@ import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
 import estilos from './estilos'
+import {Icon} from 'react-native-elements'
 
 import {navegar} from '../actions/AppActions'
 
@@ -40,32 +41,31 @@ export class Footer extends Component{
                 
                 <View style={estilos.footerButtonWrap} >
                     <TouchableOpacity onPress={()=> this.props.navegar('sobre')} style={this._setLayout('sobre')}>
-                        <Image resizeMode='contain' source={require('../imgs/sobrePeq.png')} style={estilos.footerIcon}/>
-                        
+                    <Icon name='people' color='#4f5b62' />
                     </TouchableOpacity>
                     
                     <Text style={estilos.footerTextButton}>Sobre</Text>
                 </View>
 
                 <View style={estilos.footerButtonWrap}>
-                    <TouchableOpacity onPress={()=> this.props.navegar('portfolio')} style={this._setLayout('portfolio')}>
-                        <Image resizeMode='contain' source={require('../imgs/portfolioPeq.png')} style={estilos.footerIcon}/>
+                    <TouchableOpacity onPress={()=> this.props.navegar('servicos')} style={this._setLayout('servicos')}>
+                        <Icon name='photo-camera' color='#4f5b62' />
                     </TouchableOpacity>
                     
                     <Text style={estilos.footerTextButton}>Portfólio</Text>
                 </View>
                 
                 <View style={estilos.footerButtonWrap}>
-                    <TouchableOpacity onPress={()=> this.props.navegar('redesSociais')} style={this._setLayout('redesSociais')}>
-                        <Image resizeMode='contain' source={require('../imgs/redesPeq.png')} style={estilos.footerIcon}/>
+                    <TouchableOpacity onPress={()=> this.props.navegar('portfolio')} style={this._setLayout('portfolio')}>
+                    <Icon name='photo-library' color='#4f5b62' />
                     </TouchableOpacity>
                     
                     <Text style={estilos.footerTextButton}>Social</Text>
                 </View>
                 
                 <View style={estilos.footerButtonWrap}>
-                    <TouchableOpacity onPress={()=> this.props.navegar('servicos')} style={this._setLayout('servicos')}>
-                        <Image resizeMode='contain' source={require('../imgs/servicosPeq.png')} style={estilos.footerIcon}/>
+                    <TouchableOpacity onPress={()=> this.props.navegar('redesSociais')} style={this._setLayout('redesSociais')}>
+                    <Icon name='share' color='#4f5b62' />
                     </TouchableOpacity>
                     
                     <Text style={estilos.footerTextButton}>Serviços</Text>
@@ -73,7 +73,7 @@ export class Footer extends Component{
                 
                 <View style={estilos.footerButtonWrap}>
                     <TouchableOpacity onPress={()=> this.props.navegar('contato')} style={this._setLayout('contato')}>
-                        <Image resizeMode='contain' source={require('../imgs/contatoPeq.png')} style={estilos.footerIcon}/>
+                    <Icon name='mail' color='#4f5b62' />
                     </TouchableOpacity>
                 
                     <Text style={estilos.footerTextButton}>Contato</Text>
