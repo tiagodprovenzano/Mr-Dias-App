@@ -117,7 +117,7 @@ footerTextButton: {
 
 footerIcon: {
     alignSelf: 'center',
-    height:height(10) 
+    height:height(9) 
 },
 
 homeTopWrap: {
