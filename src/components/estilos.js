@@ -154,9 +154,9 @@ homeButtomText:{
 },
 
 portfolioTouchableTop:{
-    backgroundColor:'#E5E7E9', 
+    backgroundColor:'#F2F3F4', 
     flexDirection:'row', 
-    marginVertical:5, 
+    marginVertical:1, 
     alignItems:'center', 
     elevation:4
 },
