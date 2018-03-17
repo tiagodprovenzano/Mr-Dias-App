@@ -37,7 +37,7 @@ export class Footer extends Component{
 
     render(){
         return(
-            <View style={{height:height(12),elevation:7, backgroundColor:'#283747', flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
+            <View style={{height:height(10),elevation:7, backgroundColor:'#263238', opacity:50, flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
                 
                 <View style={estilos.footerButtonWrap} >
                     <TouchableOpacity onPress={()=> this.props.navegar('sobre')} style={this._setLayout('sobre')}>
