@@ -74,8 +74,6 @@ export class Home extends Component{
                 }
                 
             }
-            //console.log(newData)
-            //console.log(paginas)
         
         let database = {}
 
@@ -178,7 +176,7 @@ export class Home extends Component{
     }
 
     render(){
-        
+    
        if(Object.keys(this.props.database).length > 0){
         
         let labelBotao = this.props.database['home']['labelBotao']
@@ -222,7 +220,6 @@ export class Home extends Component{
         }
         
         else{
-            let opcoes = [{titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: require('../imgs/sobre.png')},{titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: require('../imgs/servicos.png')},{titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: require('../imgs/portfolio.png')},{titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: require('../imgs/redes.png')},{titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: require('../imgs/contato.png')},{titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: require('../imgs/padlock.png')},]    
             let opcoes = [{titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: 'people'},{titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: 'photo-camera'},{titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: 'photo-library'},{titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: 'share'},{titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: 'mail'},{titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: 'lock'},]    
         return(
             <View style={estilos.homeTopWrap}>
@@ -256,11 +253,14 @@ export class Home extends Component{
     
     }else{
         return(
-            <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+            <View style={{flex:1, alignItems:'center', justifyContent:'center', backgroundColor:'#F7F9F9'}}>
+             <Image resizeMode='contain' source={require('../imgs/logo.png')} style={{height:height(20), alignSelf: 'center'}}/>
             <ActivityIndicator size='large'/>
             </View>
         )
     }}
+
+    
 }
 
 const mapStateToProps = state =>{
@@ -269,7 +269,6 @@ const mapStateToProps = state =>{
     return{
         navegador,
         database, 
-        opcoes
     }
 }
 
