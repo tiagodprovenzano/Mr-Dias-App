@@ -13,7 +13,7 @@ headerWrap:{
     alignSelf:'stretch',  
     elevation:7, 
     height:height(10), 
-    backgroundColor:'#ffffff', 
+    backgroundColor:'#F7F9F9', 
     justifyContent:'center'
 },
 
