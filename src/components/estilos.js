@@ -100,8 +100,8 @@ servicosContentText:{
 },
 
 footerButtonWrap: {
-    justifyContent:'space-between', 
-    height:height(10)
+    justifyContent:'flex-start', 
+    marginTop:5
 
 },
 
