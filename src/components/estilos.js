@@ -58,10 +58,12 @@ sobreContentImage:{
 },
 
 servicosHeaderWrap: { 
-    backgroundColor:'#E5E7E9',
-    elevation:2, 
-    padding:10, 
-    marginVertical:7
+    backgroundColor:'#F2F3F4', 
+    flexDirection:'row', 
+    marginVertical:1, 
+    alignItems:'center', 
+    elevation:4,
+    height:height(10)
 },
 
 servicosHeaderTitle: {
