@@ -106,12 +106,13 @@ footerButtonWrap: {
 },
 
 footerTextButton: {
-    textAlignVertical:'bottom', 
-    color:'#EBEDEF', 
+    textAlignVertical:'top', 
+    color:'#ffffff', 
     textAlign:'center', 
-    fontSize:8, 
-    fontFamily:'monospace', 
-    fontWeight:'bold'
+    fontSize:6, 
+    fontFamily:'Roboto', 
+    fontWeight:'bold',
+    alignSelf:'center'
 },
 
 footerIcon: {
