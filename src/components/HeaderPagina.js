@@ -28,18 +28,44 @@ export class HeaderPagina extends Component{
 
                 </TouchableOpacity>
                 <View style={{width:width(82)}}>
-                <Header />
+                <View style={estilos.headerWrap}>
+                    <Text style={estilos.headerPaginaText}>{this._renderHeader(this.props.navegador)}</Text>
+                </View>
                 </View>
                 
 
                 </View>
         )
     }
+    _renderHeader(curr){
+        if(curr === 'sobre'){
+            return 'Sobre'
+        }
+        if(curr === 'servicos'){
+            return 'Serviços'
+        }
+        if(curr === 'portfolio'){
+            return 'Portfólio'
+        }
+        if(curr === 'portfolio'){
+            return 'Portfólio'
+        }
+        if(curr === 'redesSociais'){
+            return 'Redes Sociais'
+        }
+        if(curr === 'contato'){
+            return 'Contato'
+        }
+        if(curr === 'cliente'){
+            return 'Área do Cliente'
+        }
+    }
 }
 
 const mapStateToProps = state =>{
+    let navegador = state.AppReducer.navegador
     return{
-
+        navegador
     }
 }
 
