@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import Accordion from 'react-native-collapsible/Accordion';
 
+
 import {navegar} from '../actions/AppActions'
 import HeaderPagina from '../components/HeaderPagina'
 import Footer from '../components/Footer'
@@ -37,7 +38,7 @@ export class Servicos extends Component{
         let databaseContent = this.props.database['servicos']['conteudo']
         
         return(
-            <View style={{flex:1}}>
+            <View style={{flex:1, backgroundColor:'#EBEDEF', }}>
                 <View style={{flex:1}}>
                 
                 <HeaderPagina/>

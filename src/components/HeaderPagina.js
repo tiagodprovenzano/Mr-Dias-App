@@ -51,7 +51,7 @@ export class HeaderPagina extends Component{
             return 'Portfólio'
         }
         if(curr === 'redesSociais'){
-            return 'Redes Sociais'
+            return 'Publicações'
         }
         if(curr === 'contato'){
             return 'Contato'

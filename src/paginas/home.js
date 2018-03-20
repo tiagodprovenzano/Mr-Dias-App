@@ -220,7 +220,14 @@ export class Home extends Component{
         }
         
         else{
-            let opcoes = [{titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: 'people'},{titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: 'photo-camera'},{titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: 'photo-library'},{titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: 'share'},{titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: 'mail'},{titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: 'lock'},]    
+            let opcoes = [
+                {titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: 'people'},
+                {titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: 'photo-camera'},
+                {titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: 'photo-library'},
+                {titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: 'share'},
+                {titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: 'mail'},
+                {titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: 'lock'},
+            ]    
         return(
             <View style={estilos.homeTopWrap}>
             <Header/>
@@ -241,7 +248,6 @@ export class Home extends Component{
                             <Icon
                                 name={item.icone} size={55} color='#f7941d'/>
                                 
-                            <Image resizeMode='contain' source={item.icone} style={{ alignSelf: 'center'}}/>
                             </TouchableOpacity>
                             <Text style={estilos.homeButtomText}>{item.titulo}</Text>
                             </View>

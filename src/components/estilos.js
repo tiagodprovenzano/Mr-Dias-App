@@ -167,6 +167,15 @@ portfolioImageThumb:{
     borderRadius:5,  
     width:width(15),
 },
+portfolioFaceImageThumb:{
+    
+    marginLeft:10,
+    marginVertical:5,
+    alignSelf: 'center',
+    borderRadius:10,  
+    width:width(15),
+    height:width(15)
+},
 
 portfolioTitleText:{
     textAlignVertical:'center', 
