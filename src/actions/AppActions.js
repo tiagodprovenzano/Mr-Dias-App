@@ -7,7 +7,9 @@ import {
     MUDA_TELEFONE,
     MUDA_MENSAGEM, 
     MUDA_DATABASE,
-    MUDA_ARRVERIF
+    MUDA_ARRVERIF,
+    MUDA_FACEBOOKFEED,
+    MUDA_FACEBOOKALBUMS
 
 } from './types'
 
@@ -57,5 +59,17 @@ export const mudaArrVerif = (arr) => {
     return {
         type: MUDA_ARRVERIF,
         payload: arr
+    }
+}
+export const mudaFaceFeed = (feed) => {
+    return {
+        type: MUDA_FACEBOOKFEED,
+        payload: feed
+    }
+}
+export const mudaFaceAlbums = (albums) => {
+    return {
+        type: MUDA_FACEBOOKALBUMS,
+        payload: albums
     }
 }

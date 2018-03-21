@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
-import {Text, View, FlatList, TouchableOpacity, Image, ActivityIndicator, NetInfo} from 'react-native'
+import {Text, View, FlatList, TouchableOpacity, Image, ActivityIndicator, NetInfo, BackHandler} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension' 
 import {connect} from 'react-redux';
 import axios from'axios'
+import {Icon, IconProps} from 'react-native-elements'
+
 
 import {navegar, mudaDatabase} from '../actions/AppActions'
 import estilos from '../components/estilos'
@@ -13,9 +15,21 @@ import Sobre from './Sobre'
 import Social from './Social'
 import Cliente from './Clientes'
 import Gallery from './Gallery'
+import GalleryFace from './GalleryFace'
 import Header from '../components/Header'
 
 export class Home extends Component{
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                return false
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+    
     _checkConectivity =()=> {
 
             NetInfo.isConnected.fetch().then(isConnected => {
@@ -72,8 +86,6 @@ export class Home extends Component{
                 }
                 
             }
-            //console.log(newData)
-            //console.log(paginas)
         
         let database = {}
 
@@ -176,7 +188,7 @@ export class Home extends Component{
     }
 
     render(){
-        
+    
        if(Object.keys(this.props.database).length > 0){
         
         let labelBotao = this.props.database['home']['labelBotao']
@@ -218,9 +230,21 @@ export class Home extends Component{
             <Gallery/>
         )
         }
+        if(this.props.navegador === 'galleryFace'){
+        return(
+            <GalleryFace/>
+        )
+        }
         
         else{
-            let opcoes = [{titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: require('../imgs/sobre.png')},{titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: require('../imgs/servicos.png')},{titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: require('../imgs/portfolio.png')},{titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: require('../imgs/redes.png')},{titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: require('../imgs/contato.png')},{titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: require('../imgs/padlock.png')},]    
+            let opcoes = [
+                {titulo:labelBotao['botao1'].conteudo, chave:'sobre', icone: 'people'},
+                {titulo:labelBotao['botao2'].conteudo, chave:'servicos', icone: 'photo-camera'},
+                {titulo:labelBotao['botao3'].conteudo, chave:'portfolio', icone: 'photo-library'},
+                {titulo:labelBotao['botao4'].conteudo, chave:'redesSociais',icone: 'share'},
+                {titulo:labelBotao['botao5'].conteudo, chave:'contato', icone: 'mail'},
+                {titulo:labelBotao['botao6'].conteudo, chave:'cliente', icone: 'lock'},
+            ]    
         return(
             <View style={estilos.homeTopWrap}>
             <Header/>
@@ -230,7 +254,7 @@ export class Home extends Component{
                     
                     numColumns={2}
                     renderItem={({item})=>{
-                        
+    
                         return(
                             <View style={estilos.homeButtomWrap}>
                             <TouchableOpacity
@@ -238,7 +262,9 @@ export class Home extends Component{
                                 style={estilos.homeTouchableWrap}
                                 
                             >
-                            <Image resizeMode='contain' source={item.icone} style={{ alignSelf: 'center'}}/>
+                            <Icon
+                                name={item.icone} size={55} color='#f7941d'/>
+                                
                             </TouchableOpacity>
                             <Text style={estilos.homeButtomText}>{item.titulo}</Text>
                             </View>
@@ -250,21 +276,22 @@ export class Home extends Component{
     
     }else{
         return(
-            <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+            <View style={{flex:1, alignItems:'center', justifyContent:'center', backgroundColor:'#F7F9F9'}}>
+             <Image resizeMode='contain' source={require('../imgs/logo.png')} style={{height:height(20), alignSelf: 'center'}}/>
             <ActivityIndicator size='large'/>
             </View>
         )
     }}
+
+    
 }
 
 const mapStateToProps = state =>{
     let navegador = state.AppReducer.navegador
     let database = state.AppReducer.database
-    let opcoes = [{titulo:'Sobre nós', chave:'sobre', icone: require('../imgs/sobre.png')},{titulo:'Serviços', chave:'servicos', icone: require('../imgs/servicos.png')},{titulo:'Portfólio', chave:'portfolio', icone: require('../imgs/portfolio.png')},{titulo:'Redes Sociais', chave:'redesSociais',icone: require('../imgs/redes.png')},{titulo:'Contato', chave:'contato', icone: require('../imgs/contato.png')},{titulo:'Área do cliente', chave:'cliente', icone: require('../imgs/padlock.png')},]
     return{
         navegador,
         database, 
-        opcoes
     }
 }
 

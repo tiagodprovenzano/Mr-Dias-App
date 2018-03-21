@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, Image, FlatList, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, Image, FlatList, ScrollView, BackHandler} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
 import Gallery from 'react-native-image-gallery'
 
 import estilos from '../components/estilos'
-import {navegar, mudaGaleria} from '../actions/AppActions'
+import {navegar, mudaGaleria, mudaFaceAlbums} from '../actions/AppActions'
 import Footer from '../components/Footer'
 import HeaderPagina from '../components/HeaderPagina'
 import {galeriaCasamentos, galeriaEventos, galeriaNatureza, galeriaPreWeddings, galeriaRetratos, galeriaUrbana} from '../components/galerias'
@@ -32,10 +32,39 @@ export class Portfolio extends Component{
             </TouchableOpacity>
             )
     }
+   
+
+    async _getFaceAlbums(){
+        const response = await fetch(
+               
+            "https://graph.facebook.com/v2.12/1778686102441661/albums?fields=name,photos{images}&access_token=1782419698481261%7CoP4xuA2kj3arNVhromunhnrt5VA");
+          let resposta = await response.json()
+            this.props.mudaFaceAlbums(resposta)
+    
+    }
+
+    componentWillMount(){
+        this._getFaceAlbums()
+    }
+
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
     
     render(){
         let database = this.props.database['portfolio']['categorias']
-        console.log(database)
         let funcoes = 
         [
             {titulo:database['categoria1'].conteudo, foto:require('../imgs/casamentoThumb.jpg'), galeria:galeriaCasamentos}, 
@@ -46,7 +75,7 @@ export class Portfolio extends Component{
             {titulo:database['categoria6'].conteudo, foto:require('../imgs/urbanaThumb.jpg'), galeria:galeriaUrbana} 
         ]
         return(
-            <View style={{flex:1}}>
+            <View style={{flex:1,backgroundColor:'#EBEDEF', }}>
                 <View style={{flex:1}}>
                 
                 <HeaderPagina/>
@@ -57,6 +86,35 @@ export class Portfolio extends Component{
                 
                 data={funcoes}
                 renderItem={({item})=> this._renderItem(item)}
+
+                />
+                <FlatList
+                
+                data={this.props.facebookAlbums.data}
+                renderItem={({item})=>{
+                    
+                    if(item.name != 'Timeline Photos' && item.name != 'Profile Pictures' && item.name != "Cover Photos"){
+                        return(
+            
+                            <TouchableOpacity style={estilos.portfolioTouchableTop}
+                            onPress={()=>{
+                                
+                                this.props.mudaGaleria(item.photos.data)
+                                this.props.navegar('galleryFace')
+                            }}
+                                
+                            >   
+                                <Image raised resizeMode='cover' source={{uri:item.photos.data[0].images[0].source}} style={estilos.portfolioFaceImageThumb}/>
+                                <Text style={estilos.portfolioTitleText}>{item.name}</Text>
+                            </TouchableOpacity>
+                        );
+                    }
+                    else{
+                        return null
+                    }
+                
+                
+                }}
 
                 />
                 </View>
@@ -71,12 +129,14 @@ export class Portfolio extends Component{
 const mapStateToProps = state =>{
     let navegador = state.AppReducer.navegador
     let database = state.AppReducer.database
+    let facebookAlbums = state.AppReducer.facebookAlbums
     
     return{
         navegador,
-        database
+        database,
+        facebookAlbums
 
     }
 }
 
-export default connect(mapStateToProps, {navegar, mudaGaleria})(Portfolio)
+export default connect(mapStateToProps, {navegar, mudaGaleria, mudaFaceAlbums})(Portfolio)

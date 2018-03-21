@@ -7,7 +7,9 @@ import {
     MUDA_TELEFONE,
     MUDA_MENSAGEM, 
     MUDA_DATABASE,
-    MUDA_ARRVERIF
+    MUDA_ARRVERIF,
+    MUDA_FACEBOOKFEED,
+    MUDA_FACEBOOKALBUMS
 
    } from '../actions/types.js'
 
@@ -21,6 +23,8 @@ const INITIAL_STATE = {
     mensagem:'',
     database:{},
     arrVerif:[],
+    facebookFeed:{},
+    facebookAlbums:{},
 
 }
 
@@ -49,6 +53,12 @@ export default (state = INITIAL_STATE, action) =>{
     }
      if (action.type == MUDA_ARRVERIF){
      return { ...state, arrVerif: action.payload }
+    }
+     if (action.type == MUDA_FACEBOOKFEED){
+     return { ...state, facebookFeed: action.payload }
+    }
+     if (action.type == MUDA_FACEBOOKALBUMS){
+     return { ...state, facebookAlbums: action.payload }
     }
     
 return state

@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, Image, ScrollView, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import Accordion from 'react-native-collapsible/Accordion';
+
 
 import {navegar} from '../actions/AppActions'
 import HeaderPagina from '../components/HeaderPagina'
@@ -10,6 +11,22 @@ import Footer from '../components/Footer'
 import estilos from '../components/estilos'
 
 export class Servicos extends Component{
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+    
     _renderHeader(section){
         return(
             <View style={estilos.servicosHeaderWrap}>
@@ -37,7 +54,7 @@ export class Servicos extends Component{
         let databaseContent = this.props.database['servicos']['conteudo']
         
         return(
-            <View style={{flex:1}}>
+            <View style={{flex:1, backgroundColor:'#EBEDEF', }}>
                 <View style={{flex:1}}>
                 
                 <HeaderPagina/>

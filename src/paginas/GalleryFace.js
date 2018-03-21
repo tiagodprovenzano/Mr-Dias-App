@@ -4,10 +4,24 @@ import Gallery from 'react-native-image-gallery'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
 
-import {navegar} from '../actions/AppActions'
+import {navegar, mudaGaleria} from '../actions/AppActions'
 import estilos from '../components/estilos';
 
-export class Galeria extends Component{
+export class GaleriaFace extends Component{
+    componentWillMount(){
+        let temp = this.props.galeria
+        let galeria = []
+
+        for (i in Object.keys(temp)){
+        console.log(temp[i].images[0].source)
+        galeria.push({source:{uri:temp[i].images[0].source}})
+        }
+        console.log(galeria)
+        this.props.mudaGaleria(galeria)
+        
+        
+    }
+
     _teste(){
         this.props.navegar('portfolio')
     }
@@ -37,11 +51,11 @@ export class Galeria extends Component{
                 >
                     <Text style={estilos.backButtomText}>{'<'}</Text>
             </TouchableOpacity>
-            <Gallery
-                style={{flex:1, backgroundColor:'black'}}
+             <Gallery
+               style={{flex:1, backgroundColor:'black'}}
                 images={this.props.galeria}
 
-            />
+            /> 
             </View>
         )
     }
@@ -49,16 +63,12 @@ export class Galeria extends Component{
 
 const mapStateToProps = state =>{
 
-    let source = [
-        { source: require('../imgs/preWedding.jpg'), dimensions: { width: 150, height: 150 } },
-        { source: require('../imgs/retratos.jpg'), dimensions: { width: 150, height: 150 } },
-    ]
+    
 
     let galeria = state.AppReducer.galeria
     return{
-        source,
         galeria
     }
 }
 
-export default connect(mapStateToProps, {navegar})(Galeria)
+export default connect(mapStateToProps, {navegar, mudaGaleria})(GaleriaFace)

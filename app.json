@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "mrdias",
-    "description": "This project is really great.",
+    "name": "Mr. Dias Fotografia",
+    "description": "Aplicativo demonstração da Provenzano TI.",
     "slug": "mrdias",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/imgs/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -16,6 +16,9 @@
     },
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "package": "com.provenzanoti.mrdias"
     }
   }
 }

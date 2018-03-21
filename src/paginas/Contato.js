@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
 import Accordion from 'react-native-collapsible/Accordion';
 import {email, phonecall} from 'react-native-communications';
+import {Icon} from 'react-native-elements'
 
 import estilos from '../components/estilos'
 import {navegar, mudaEmail, mudaMensagem, mudaNome, mudaTelefone, mudaArrVerif} from '../actions/AppActions'
@@ -50,7 +51,7 @@ export class Contato extends Component{
         let database = this.props.database['contato']
         if(section === 'Formulário'){
             return(
-                <View style={estilos.contatoTitleTopWrap} >
+                <View style={estilos.servicosHeaderWrap} >
                 <Text style={estilos.contatoTitleText}>
                         {database['formulario']['titulo'].conteudo}
                 </Text>
@@ -59,7 +60,7 @@ export class Contato extends Component{
         }
         if(section === 'Dados de contato'){
             return( 
-            <View style={estilos.contatoTitleTopWrap} >
+            <View style={estilos.servicosHeaderWrap} >
                 <Text style={estilos.contatoTitleText}>Contato direto:</Text>
             </View>
             )
@@ -147,7 +148,11 @@ export class Contato extends Component{
             <View >
             <View style={estilos.contatoDiretoTopWrap}>
                 <View style={{width:width(20)}}>
-                    <Text style={estilos.contatoSubTitleText}>e-mail:</Text>
+                <Icon 
+                    name='mail'
+                    color='#f7941d'
+                    containerStyle ={{alignSelf:'flex-start'}}
+                 />
                 </View>
                 <TouchableOpacity style={{width:width(70)}}
                     onPress={()=>{
@@ -159,7 +164,11 @@ export class Contato extends Component{
             </View>
             <View style={estilos.contatoDiretoTopWrap}>
                 <View style={{width:width(20)}}>
-                    <Text style={estilos.contatoSubTitleText}>cel:</Text>
+                <Icon 
+                    name='phonelink-ring'
+                    color='#f7941d'
+                    containerStyle ={{alignSelf:'flex-start'}}
+                />
                 </View>
                 <TouchableOpacity style={{width:width(70)}}
                     onPress={()=>{
@@ -172,7 +181,11 @@ export class Contato extends Component{
 
             <View style={estilos.contatoDiretoTopWrap}>
             <View style={{width:width(20)}}>
-                <Text style={estilos.contatoSubTitleText}>web:</Text>
+                <Icon 
+                    name='laptop'
+                    color='#f7941d'
+                    containerStyle ={{alignSelf:'flex-start'}}
+                />
             </View>
                 <TouchableOpacity style={{width:width(70)}}>
                 <Text style={estilos.contatoContentText}>www.provenzanoti.com.br</Text>
@@ -181,6 +194,22 @@ export class Contato extends Component{
             </View>
             )
         }
+    }
+
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
     }
 
     render(){
