@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, Image, ScrollView, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import Accordion from 'react-native-collapsible/Accordion';
@@ -11,6 +11,22 @@ import Footer from '../components/Footer'
 import estilos from '../components/estilos'
 
 export class Servicos extends Component{
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+    
     _renderHeader(section){
         return(
             <View style={estilos.servicosHeaderWrap}>

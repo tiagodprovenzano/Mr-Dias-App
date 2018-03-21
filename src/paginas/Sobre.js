@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native'
+import {View, Text, TouchableOpacity, ScrollView, Image, BackHandler, Pla} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
 import {Card} from 'react-native-elements'
@@ -10,6 +10,9 @@ import Footer from '../components/Footer'
 import estilos from '../components/estilos';
 
 export class Sobre extends Component{
+    
+   
+   
     render(){
         let database = this.props.database['sobre']
 //        console.log(Object.keys(database))
@@ -65,7 +68,23 @@ export class Sobre extends Component{
     </View>
     
 )}
-    
+
+_teste(){
+    this.props.navegar('home')
+}
+
+componentDidMount(){
+   
+        BackHandler.addEventListener('hardwareBackPress', ()=>{
+            this._teste()
+            return true
+          });
+}
+
+componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress');
+}
+
 }
 
 const mapStateToProps = state =>{

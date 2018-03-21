@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, View, FlatList, TouchableOpacity, Image, ActivityIndicator, NetInfo} from 'react-native'
+import {Text, View, FlatList, TouchableOpacity, Image, ActivityIndicator, NetInfo, BackHandler} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension' 
 import {connect} from 'react-redux';
 import axios from'axios'
@@ -15,9 +15,21 @@ import Sobre from './Sobre'
 import Social from './Social'
 import Cliente from './Clientes'
 import Gallery from './Gallery'
+import GalleryFace from './GalleryFace'
 import Header from '../components/Header'
 
 export class Home extends Component{
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                return false
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+    
     _checkConectivity =()=> {
 
             NetInfo.isConnected.fetch().then(isConnected => {
@@ -216,6 +228,11 @@ export class Home extends Component{
         if(this.props.navegador === 'gallery'){
         return(
             <Gallery/>
+        )
+        }
+        if(this.props.navegador === 'galleryFace'){
+        return(
+            <GalleryFace/>
         )
         }
         

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, Alert, ScrollView, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import axios from 'axios'
@@ -194,6 +194,22 @@ export class Contato extends Component{
             </View>
             )
         }
+    }
+
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
     }
 
     render(){

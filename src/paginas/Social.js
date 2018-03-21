@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Expo from 'expo'
-import {View, Text, TouchableOpacity, Alert, FlatList, Image} from 'react-native'
+import {View, Text, TouchableOpacity, Alert, FlatList, Image, BackHandler} from 'react-native'
 import {connect} from 'react-redux'
 import {width, height} from 'react-native-dimension'
 import {Card} from 'react-native-elements'
@@ -30,6 +30,22 @@ export class Social extends Component{
 
     componentWillMount(){
         this._login()
+    }
+
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
     }
 
     render(){

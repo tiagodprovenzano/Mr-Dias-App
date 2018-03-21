@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, Image, FlatList, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, Image, FlatList, ScrollView, BackHandler} from 'react-native'
 import {width, height, totalSize} from 'react-native-dimension'
 import {connect} from 'react-redux'
 import Gallery from 'react-native-image-gallery'
@@ -39,13 +39,28 @@ export class Portfolio extends Component{
                
             "https://graph.facebook.com/v2.12/1778686102441661/albums?fields=name,photos{images}&access_token=1782419698481261%7CoP4xuA2kj3arNVhromunhnrt5VA");
           let resposta = await response.json()
-            console.log(resposta)
             this.props.mudaFaceAlbums(resposta)
     
     }
 
     componentWillMount(){
         this._getFaceAlbums()
+    }
+
+    _teste(){
+        this.props.navegar('home')
+    }
+    
+    componentDidMount(){
+       
+            BackHandler.addEventListener('hardwareBackPress', ()=>{
+                this._teste()
+                return true
+              });
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
     }
     
     render(){
@@ -79,11 +94,15 @@ export class Portfolio extends Component{
                 renderItem={({item})=>{
                     
                     if(item.name != 'Timeline Photos' && item.name != 'Profile Pictures' && item.name != "Cover Photos"){
-                        console.log(item.photos.data[0].images[0].source)
                         return(
             
                             <TouchableOpacity style={estilos.portfolioTouchableTop}
-                            //onPress={()=>this._renderGallery(item.galeria)}
+                            onPress={()=>{
+                                
+                                this.props.mudaGaleria(item.photos.data)
+                                this.props.navegar('galleryFace')
+                            }}
+                                
                             >   
                                 <Image raised resizeMode='cover' source={{uri:item.photos.data[0].images[0].source}} style={estilos.portfolioFaceImageThumb}/>
                                 <Text style={estilos.portfolioTitleText}>{item.name}</Text>
