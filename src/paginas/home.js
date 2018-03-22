@@ -6,7 +6,7 @@ import axios from'axios'
 import {Icon, IconProps} from 'react-native-elements'
 
 
-import {navegar, mudaDatabase} from '../actions/AppActions'
+import {navegar, mudaDatabase, mudaConStatus} from '../actions/AppActions'
 import estilos from '../components/estilos'
 import Servicos from './Servicos'
 import Portfolio from './Portfolio'
@@ -17,8 +17,45 @@ import Cliente from './Clientes'
 import Gallery from './Gallery'
 import GalleryFace from './GalleryFace'
 import Header from '../components/Header'
+import AsyncHandler from '../components/AsyncHandler'
 
 export class Home extends Component{
+    componentWillMount(){
+        NetInfo.isConnected.fetch().then(isConnected => {
+        
+            //Always false, so ignore/do nothing here
+    
+    });
+    
+    NetInfo.isConnected.addEventListener(
+    
+            'connectionChange',
+    
+    this.handleFirstConnectivityChange
+    
+    );
+    
+    }
+    
+    
+    
+    handleFirstConnectivityChange = (isConnected) => {
+    
+        if (isConnected == true) {
+            this.props.mudaConStatus(true)
+          //  console.log('home, connected')
+        }
+    
+        else {
+            this.props.mudaConStatus(false)
+         //   console.log('home, offline')
+            
+        }
+    
+    
+    }
+    
+    
     componentDidMount(){
        
             BackHandler.addEventListener('hardwareBackPress', ()=>{
@@ -28,163 +65,6 @@ export class Home extends Component{
     
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress');
-    }
-    
-    _checkConectivity =()=> {
-
-            NetInfo.isConnected.fetch().then(isConnected => {
-        
-                //Always false, so ignore/do nothing here
-        
-            });
-        
-            NetInfo.isConnected.addEventListener(
-        
-                'connectionChange',
-        
-                this.handleFirstConnectivityChange
-        
-            );
-        
-        }
-        
-        
-        
-        handleFirstConnectivityChange = (isConnected) => {
-        
-            if (isConnected == true) {
-        
-                console.log('connected')
-        
-            }
-        
-            else {
-        
-         console.log('offline')
-            }
-        
-        }
-    
-    
-    
-    componentWillMount(){
-        this._checkConectivity()        
-        let newData= []
-        let paginas = []
-        let categoriasHome = []
-        let categoriasContato = []
-        let categoriasSobre = []
-        let categoriasPortfolio = []
-        let categoriasServicos = []
-        axios.get('https://www.provenzanoti.com.br/mrdias/php/mrdiasStringsQuery.php')
-        .then(response => {
-            for(i in response.data){
-                
-                newData.push( JSON.parse(response.data[i]) )
-                if(!paginas.includes(JSON.parse(response.data[i])['pagina'])){
-                    paginas.push(JSON.parse(response.data[i])['pagina'])
-                }
-                
-            }
-        
-        let database = {}
-
-        for(i in paginas){
-            database[paginas[i]] = {}
-        }
-
-        for (i in newData){
-            if (newData[i]['pagina'] === 'home'){
-                if(!categoriasHome.includes(newData[i]['tipo'])){
-                    categoriasHome.push(newData[i]['tipo'])
-                }
-                let conteudo = newData[i]['conteudo']
-                try{
-                    let conteudo = newData[i]['conteudo']
-                    database['home'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                catch(e){
-                    database['home'][newData[i]['tipo']] = {}
-                    database['home'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                               
-            }
-            if (newData[i]['pagina'] === 'contato'){
-                if(!categoriasContato.includes(newData[i]['tipo'])){
-                    categoriasContato.push(newData[i]['tipo'])
-                    
-                }
-
-                let conteudo = newData[i]['conteudo']
-                try{
-                    let conteudo = newData[i]['conteudo']
-                    database['contato'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                catch(e){
-                    database['contato'][newData[i]['tipo']] = {}
-                    database['contato'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                
-            }
-            if (newData[i]['pagina'] === 'sobre'){
-                if(!categoriasSobre.includes(newData[i]['tipo'])){
-                    categoriasSobre.push(newData[i]['tipo'])
-                    
-                }
-                let conteudo = newData[i]['conteudo']
-                try{
-                    let conteudo = newData[i]['conteudo']
-                    database['sobre'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                catch(e){
-                    database['sobre'][newData[i]['tipo']] = {}
-                    database['sobre'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                
-            }
-            if (newData[i]['pagina'] === 'portfolio'){
-                if(!categoriasPortfolio.includes(newData[i]['tipo'])){
-                    categoriasPortfolio.push(newData[i]['tipo'])
-                    
-                }
-                let conteudo = newData[i]['conteudo']
-                try{
-                    let conteudo = newData[i]['conteudo']
-                    database['portfolio'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                catch(e){
-                    database['portfolio'][newData[i]['tipo']] = {}
-                    database['portfolio'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                
-            }
-            if (newData[i]['pagina'] === 'servicos'){
-                if(!categoriasServicos.includes(newData[i]['tipo'])){
-                    categoriasServicos.push(newData[i]['tipo'])
-                    
-                }
-                let conteudo = newData[i]['conteudo']
-                try{
-                    let conteudo = newData[i]['conteudo']
-                    database['servicos'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                catch(e){
-                    database['servicos'][newData[i]['tipo']] = {}
-                    database['servicos'][newData[i]['tipo']][newData[i]['area']] = {conteudo}
-                }
-                
-            }
-
-        }
-
-        this.props.mudaDatabase(database)
-                
-    
-        }
-    
-    
-    )
-    
     }
 
     render(){
@@ -269,30 +149,46 @@ export class Home extends Component{
                             <Text style={estilos.homeButtomText}>{item.titulo}</Text>
                             </View>
                     )}}
+                    
                 />
+                {/* <Text>{this.checkStatus()}</Text> */}
+                <AsyncHandler/>
             </View>
         )
     }
     
     }else{
+        console.log(this.props.nome)
         return(
             <View style={{flex:1, alignItems:'center', justifyContent:'center', backgroundColor:'#F7F9F9'}}>
+             <AsyncHandler/>
              <Image resizeMode='contain' source={require('../imgs/logo.png')} style={{height:height(20), alignSelf: 'center'}}/>
-            <ActivityIndicator size='large'/>
+             <ActivityIndicator size='large'/>
             </View>
         )
     }}
 
+    checkStatus(){
+        if(this.props.isOnline){
+            return 'Online'
+        }else{
+            return 'Offline'
+        }
+    }
     
 }
 
 const mapStateToProps = state =>{
     let navegador = state.AppReducer.navegador
     let database = state.AppReducer.database
+    let nome = state.AppReducer.nome
+    let isOnline = state.AppReducer.isOnline
     return{
         navegador,
         database, 
+        nome,
+        isOnline
     }
 }
 
-export default connect(mapStateToProps, {navegar, mudaDatabase})(Home)
+export default connect(mapStateToProps, {navegar, mudaDatabase, mudaConStatus})(Home)

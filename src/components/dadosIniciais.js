@@ -54,7 +54,7 @@ export const dadosIniciais = {
         "categoria5":  {
           "conteudo": "Natureza",
         },
-        "catehoria6":  {
+        "categoria6":  {
           "conteudo": "Urbanas",
         },
       },
