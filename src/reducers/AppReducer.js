@@ -9,7 +9,8 @@ import {
     MUDA_DATABASE,
     MUDA_ARRVERIF,
     MUDA_FACEBOOKFEED,
-    MUDA_FACEBOOKALBUMS
+    MUDA_FACEBOOKALBUMS, 
+    MUDA_CONSTATUS
 
    } from '../actions/types.js'
 
@@ -25,6 +26,7 @@ const INITIAL_STATE = {
     arrVerif:[],
     facebookFeed:{},
     facebookAlbums:{},
+    isOnline: false,
 
 }
 
@@ -59,6 +61,9 @@ export default (state = INITIAL_STATE, action) =>{
     }
      if (action.type == MUDA_FACEBOOKALBUMS){
      return { ...state, facebookAlbums: action.payload }
+    }
+     if (action.type == MUDA_CONSTATUS){
+     return { ...state, isOnline: action.payload }
     }
     
 return state

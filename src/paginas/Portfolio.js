@@ -11,6 +11,16 @@ import HeaderPagina from '../components/HeaderPagina'
 import {galeriaCasamentos, galeriaEventos, galeriaNatureza, galeriaPreWeddings, galeriaRetratos, galeriaUrbana} from '../components/galerias'
 
 export class Portfolio extends Component{
+    componentWillMount(){
+       
+         if(this.props.isOnline){
+            this._getFaceAlbums()
+         }
+    
+    };
+    
+   
+
     _renderGallery(galeria){
         this.props.mudaGaleria(galeria)
         return (
@@ -35,16 +45,14 @@ export class Portfolio extends Component{
    
 
     async _getFaceAlbums(){
+        console.log('_getFaceAlbums')
         const response = await fetch(
                
             "https://graph.facebook.com/v2.12/1778686102441661/albums?fields=name,photos{images}&access_token=1782419698481261%7CoP4xuA2kj3arNVhromunhnrt5VA");
           let resposta = await response.json()
+          console.log(resposta)
             this.props.mudaFaceAlbums(resposta)
     
-    }
-
-    componentWillMount(){
-        this._getFaceAlbums()
     }
 
     _teste(){
@@ -88,6 +96,29 @@ export class Portfolio extends Component{
                 renderItem={({item})=> this._renderItem(item)}
 
                 />
+                
+                {this._renderFacebookAlbum()}
+
+                </View>
+                </ScrollView>
+                </View>
+                {/* <Text>{this.checkStatus()}</Text> */}
+                <Footer/>
+            </View>
+        )
+    }
+    checkStatus(){
+        if(this.props.isOnline){
+            return 'Online'
+        }else{
+            return 'Offline'
+        }
+    }
+
+    _renderFacebookAlbum(){
+        if(this.props.facebookAlbums != {}){
+            return(
+
                 <FlatList
                 
                 data={this.props.facebookAlbums.data}
@@ -117,12 +148,11 @@ export class Portfolio extends Component{
                 }}
 
                 />
-                </View>
-                </ScrollView>
-                </View>
-                <Footer/>
-            </View>
-        )
+
+            )
+        }else{
+            return null
+        }
     }
 }
 
@@ -130,11 +160,13 @@ const mapStateToProps = state =>{
     let navegador = state.AppReducer.navegador
     let database = state.AppReducer.database
     let facebookAlbums = state.AppReducer.facebookAlbums
+    let isOnline = state.AppReducer.isOnline
     
     return{
         navegador,
         database,
-        facebookAlbums
+        facebookAlbums,
+        isOnline
 
     }
 }

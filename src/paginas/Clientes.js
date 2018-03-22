@@ -27,7 +27,7 @@ export class Clientes extends Component{
    
     render(){
         return(
-            <View style={{flex:1}}>
+            <View style={{flex:1,  backgroundColor:'#FBFCFC'}}>
                 <View style={{flex:1, alignItems:'center'}}>
                 <HeaderPagina/>
                 

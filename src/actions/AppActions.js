@@ -9,7 +9,8 @@ import {
     MUDA_DATABASE,
     MUDA_ARRVERIF,
     MUDA_FACEBOOKFEED,
-    MUDA_FACEBOOKALBUMS
+    MUDA_FACEBOOKALBUMS,
+    MUDA_CONSTATUS
 
 } from './types'
 
@@ -71,5 +72,12 @@ export const mudaFaceAlbums = (albums) => {
     return {
         type: MUDA_FACEBOOKALBUMS,
         payload: albums
+    }
+}
+export const mudaConStatus = (status) => {
+    console.log('em actions, status:' + status)
+    return {
+        type: MUDA_CONSTATUS,
+        payload: status
     }
 }
